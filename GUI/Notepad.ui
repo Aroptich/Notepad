@@ -90,15 +90,10 @@
      <rect>
       <x>300</x>
       <y>80</y>
-      <width>301</width>
+      <width>291</width>
       <height>192</height>
      </rect>
     </property>
-    <column>
-     <property name="text">
-      <string>ID</string>
-     </property>
-    </column>
     <column>
      <property name="text">
       <string>Title</string>
@@ -111,6 +106,9 @@
     </column>
    </widget>
    <widget class="QPushButton" name="btn_create">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -118,6 +116,9 @@
       <width>75</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>Создать</string>
