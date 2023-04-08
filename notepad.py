@@ -30,15 +30,25 @@ class Notepad(QMainWindow):
         write_id = self.ui.table_notes.setItem(rowPosition, 0, QTableWidgetItem(str(rowPosition + 1)))
 
         self.create_json()
+        self.add_json(id, text_title, text_note)
 
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
 
     def create_json(self):
-        if not os.path.isfile("Json/db.txt"):
-            db = {}
-            with open("Json/db.txt", 'a', encoding="cp1251") as file:
+        if not os.path.isfile("Json/notes.json"):
+            db = {"notes": []}
+            with open("Json/notes.json", 'w', encoding="cp1251") as file:
                 json.dump(db, file)
+
+    def add_json(self, id, title, note):
+        new_data = {id: [title, note]}
+        with open("Json/notes.json", encoding="cp1251") as f:
+            data = json.load(f)
+            data['notes'].append(new_data)
+            print(data)
+            with open("Json/notes.json", 'w', encoding="cp1251") as file:
+                json.dump(data, file, ensure_ascii=False, indent=2)
 
 
 
