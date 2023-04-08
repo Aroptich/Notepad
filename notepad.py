@@ -15,6 +15,7 @@ class Notepad(QMainWindow):
         self.ui.setupUi(self)
 
         self.ui.btn_create.clicked.connect(self.create_note)
+        self.ui.btn_del.clicked.connect(self.del_row_table)
 
     def create_note(self):
         rowPosition = self.ui.table_notes.rowCount()
@@ -66,6 +67,22 @@ class Notepad(QMainWindow):
                         self.ui.table_notes.setItem(rowPosition, 0, QTableWidgetItem(id))
                         self.ui.table_notes.setItem(rowPosition, 2,
                                                     QTableWidgetItem(data_time))
+
+    def del_json(self, id):
+        if os.path.isfile("Json/notes.json"):
+            with open("Json/notes.json", encoding="UTF-8") as file:
+                data = json.load(file)
+                data["notes"].pop(id)
+                with open("Json/notes.json", 'w', encoding="UTF-8") as file:
+                    json.dump(data, file, ensure_ascii=False, indent=2)
+
+
+    def del_row_table(self):
+        row = self.ui.table_notes.currentRow()
+        if row > -1:
+            self.del_json(row)
+            self.ui.table_notes.removeRow(row)
+            self.ui.table_notes.selectionModel().clearCurrentIndex()
 
 
 if __name__ == '__main__':
