@@ -16,6 +16,7 @@ class Notepad(QMainWindow):
 
         self.ui.btn_create.clicked.connect(self.create_note)
         self.ui.btn_del.clicked.connect(self.del_row_table)
+        self.ui.btn_edit.clicked.connect(self.edit_notes)
 
     def create_note(self):
         rowPosition = self.ui.table_notes.rowCount()
@@ -34,6 +35,7 @@ class Notepad(QMainWindow):
         self.create_json()
 
         self.add_json(id, text_title, text_note, str(datetime.now().strftime("%d-%m-%Y %H:%M")))
+        self.edit_notes()
 
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
@@ -83,6 +85,17 @@ class Notepad(QMainWindow):
             self.del_json(row)
             self.ui.table_notes.removeRow(row)
             self.ui.table_notes.selectionModel().clearCurrentIndex()
+
+    def edit_notes(self):
+        note = self.ui.table_notes.currentRow()
+        if os.path.isfile("Json/notes.json"):
+            with open("Json/notes.json", encoding="UTF-8") as file:
+                data = json.load(file)
+                list_values =data["notes"][note]
+                for temp_list in list_values.values():
+                    title, note, date_time = temp_list
+                    self.ui.field_note.setPlainText(note)
+                    self.ui.lineEdit.setText(title)
 
 
 if __name__ == '__main__':
