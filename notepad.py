@@ -2,13 +2,14 @@ import os.path
 import sys
 import json
 from datetime import datetime
+from email.mime import image
 
-from PyQt5.QtCore import *
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from GUI.GUI import Ui_mainWindow
 
 
-class Notepad(QMainWindow):
+class Notepad(QMainWindow, ):
     def __init__(self):
         super(Notepad, self).__init__()
         self.ui = Ui_mainWindow()
@@ -140,10 +141,11 @@ class Notepad(QMainWindow):
         self.view_table(notes)
 
 
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Notepad()
+    window.setWindowIcon((QtGui.QIcon("icons/icon-notebook.ico")))
+    window.setStyleSheet("QMainWindow {background-color: rgba(251,206,177, 0.5);}")
     window.main()
     window.show()
     sys.exit(app.exec_())

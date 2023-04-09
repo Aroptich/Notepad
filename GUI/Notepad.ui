@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>Записная книжка</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
