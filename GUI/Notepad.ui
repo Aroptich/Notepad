@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
+    <width>650</width>
     <height>380</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>610</width>
+    <width>650</width>
     <height>380</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>610</width>
+    <width>650</width>
     <height>380</height>
    </size>
   </property>
@@ -90,7 +90,7 @@
      <rect>
       <x>300</x>
       <y>80</y>
-      <width>291</width>
+      <width>311</width>
       <height>192</height>
      </rect>
     </property>
@@ -110,30 +110,11 @@
      </property>
     </column>
    </widget>
-   <widget class="QPushButton" name="btn_create">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>300</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Создать</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>300</y>
+      <x>420</x>
+      <y>310</y>
       <width>170</width>
       <height>25</height>
      </rect>
@@ -155,13 +136,45 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>310</y>
+      <width>158</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="btn_save">
+       <property name="text">
+        <string>Сорхранить</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_create">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Создать</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>610</width>
+     <width>650</width>
      <height>21</height>
     </rect>
    </property>
