@@ -35,6 +35,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="placeholderText">
+     <string>&quot;Введите заголовок&quot;</string>
+    </property>
    </widget>
    <widget class="QTextEdit" name="field_note">
     <property name="geometry">
@@ -44,6 +47,9 @@
       <width>261</width>
       <height>191</height>
      </rect>
+    </property>
+    <property name="placeholderText">
+     <string>&quot;Текст заметки&quot;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_title">
@@ -136,7 +142,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>110</x>

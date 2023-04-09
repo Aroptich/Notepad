@@ -17,7 +17,7 @@ class Notepad(QMainWindow):
         self.ui.btn_create.clicked.connect(self.create_note)
         self.ui.btn_del.clicked.connect(self.del_row_table)
         self.ui.btn_edit.clicked.connect(self.edit_notes)
-        self.ui.btn_save.clicked.connect(self.find_notes)
+        self.ui.btn_save.clicked.connect(self.save_changes)
 
     def main(self):
         if os.path.isfile("Json/notes.json"):
@@ -43,6 +43,8 @@ class Notepad(QMainWindow):
         self.ui.table_notes.setItem(rowPosition, 2, QTableWidgetItem(str(date_time)))
         self.ui.table_notes.setItem(rowPosition, 0, QTableWidgetItem(id))
         self.add_json(id, title, note, date_time)
+        self.ui.field_note.clear()
+        self.ui.lineEdit.clear()
 
     def create_json(self):
         db = {"notes": []}
@@ -89,18 +91,16 @@ class Notepad(QMainWindow):
             self.ui.table_notes.selectionModel().clearCurrentIndex()
 
     def edit_notes(self):
-        note = self.ui.table_notes.currentRow()
+        row = self.ui.table_notes.currentRow()
         if os.path.isfile("Json/notes.json"):
             with open("Json/notes.json", encoding="UTF-8") as file:
                 data = json.load(file)
-                list_values = data["notes"][note]
+                list_values = data["notes"][row]
                 for temp_list in list_values.values():
                     title, note, date_time = temp_list
-                    self.ui.field_note.setPlainText(note)
-                    self.ui.lineEdit.setText(title)
-                    return temp_list
-
-
+                    self.ui.field_note.setPlaceholderText(note)
+                    self.ui.lineEdit.setPlaceholderText(title)
+                    return list_values, row
 
     def assignment_id(self, notes: list[dict]) -> int:
         try:
@@ -118,6 +118,27 @@ class Notepad(QMainWindow):
                 id += 1
         except ValueError:
             print("Неверный формат записей")
+
+    def save_changes(self):
+
+        data_note, row = self.edit_notes()
+        self.del_json(row)
+        title = self.ui.lineEdit.text()
+        note = self.ui.field_note.toPlainText()
+        if title == "" or note == "":
+            title = self.ui.lineEdit.placeholderText()
+            note = self.ui.field_note.placeholderText()
+        print(title)
+        note = self.ui.field_note.toPlainText()
+        print(note)
+        date_time = datetime.now().strftime("%d-%m-%Y %H:%M")
+
+        notes = self.read_json()
+        id = self.assignment_id(notes)
+        self.add_json(id, title, note, date_time)
+        self.ui.table_notes.clearContents()
+        self.view_table(notes)
+
 
 
 if __name__ == '__main__':
