@@ -33,8 +33,9 @@ class Notepad(QMainWindow, ):
         self.ui.lineEdit.clear()
 
     def create_note(self):
+        """Функция создает запись"""
         notes = self.read_json()
-        print(notes)
+        # Отследивание строки в таблице QTableWidget
         rowPosition = self.ui.table_notes.rowCount()
         self.ui.table_notes.insertRow(rowPosition)
 
@@ -42,10 +43,13 @@ class Notepad(QMainWindow, ):
         note = self.ui.field_note.toPlainText()
         id = str(self.assignment_id(notes))
         date_time = datetime.now().strftime("%d-%m-%Y %H:%M")
+        # Запись данных из полей(QlineEdit, QTextEdit) в таблицу
         self.ui.table_notes.setItem(rowPosition, 1, QTableWidgetItem(title))
         self.ui.table_notes.setItem(rowPosition, 2, QTableWidgetItem(str(date_time)))
         self.ui.table_notes.setItem(rowPosition, 0, QTableWidgetItem(id))
+        # Добавление данных в json-файл введенных пользователем
         self.add_json(title, note, date_time)
+        # Очистка полей ввода
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
 
