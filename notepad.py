@@ -73,7 +73,8 @@ class Notepad(QMainWindow, ):
             with open("Json/notes.json", 'w', encoding="UTF-8") as file:
                 json.dump(data, file, ensure_ascii=False, indent=2)
 
-    def read_json(self):
+    def read_json(self) -> list[dict]:
+        """Функция считывет json-файл и возвращает список словарей"""
         with open("Json/notes.json", encoding="UTF-8") as file:
             data = json.load(file)
             return data['notes']
