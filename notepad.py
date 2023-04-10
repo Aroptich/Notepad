@@ -48,7 +48,7 @@ class Notepad(QMainWindow, ):
         self.ui.table_notes.setItem(rowPosition, 2, QTableWidgetItem(str(date_time)))
         self.ui.table_notes.setItem(rowPosition, 0, QTableWidgetItem(id))
         # Добавление данных в json-файл введенных пользователем
-        self.add_json(title, note, date_time)
+        self.add_json(title, note)
         # Очистка полей ввода
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
@@ -59,9 +59,13 @@ class Notepad(QMainWindow, ):
         with open("Json/notes.json", 'w', encoding="UTF-8") as file:
             json.dump(db, file)
 
-    def add_json(self, title, note, date_time):
+    def add_json(self, title, note):
+        """Функция принимает на вход данные с полей ввода"""
+        # Чтение данных с json-файла
         notes = self.read_json()
+        # Присваивание id записи
         id = self.assignment_id(notes)
+        date_time = datetime.now().strftime("%d-%m-%Y %H:%M")
         new_data = {id: [title, note, date_time]}
         with open("Json/notes.json", encoding="UTF-8") as f:
             data = json.load(f)
