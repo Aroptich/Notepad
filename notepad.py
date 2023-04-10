@@ -54,6 +54,7 @@ class Notepad(QMainWindow, ):
         self.ui.lineEdit.clear()
 
     def create_json(self):
+        """Функция создает json-файл в указанной директории"""
         db = {"notes": []}
         with open("Json/notes.json", 'w', encoding="UTF-8") as file:
             json.dump(db, file)
