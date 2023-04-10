@@ -12,6 +12,7 @@ from GUI.GUI import Ui_mainWindow
 class Notepad(QMainWindow, ):
     """Класс Notepad представляет из себя мини-приложение, которое позволяет по средствам API редактировать, создавать
     удалять заметки и сохранять все заметки в файл json. В классе реализовано GUI"""
+
     def __init__(self):
         super(Notepad, self).__init__()
         self.ui = Ui_mainWindow()
@@ -142,8 +143,8 @@ class Notepad(QMainWindow, ):
         except ValueError:
             print("Неверный формат записей")
 
-    def save_changes(self):
-
+    def save_changes(self) -> None:
+        """Функция сохраняет изменения отредактированной заметки"""
         data_note, row = self.edit_notes()
         self.del_json(row)
         title = self.ui.lineEdit.text()
@@ -151,12 +152,8 @@ class Notepad(QMainWindow, ):
         if title == "" or note == "":
             title = self.ui.lineEdit.placeholderText()
             note = self.ui.field_note.placeholderText()
-        print(title)
         note = self.ui.field_note.toPlainText()
-        print(note)
-        date_time = datetime.now().strftime("%d-%m-%Y %H:%M")
-
-        self.add_json(title, note, date_time)
+        self.add_json(title, note)
         self.ui.table_notes.clearContents()
         self.view_table()
 
