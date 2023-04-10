@@ -102,7 +102,9 @@ class Notepad(QMainWindow, ):
                 with open("Json/notes.json", 'w', encoding="UTF-8") as file:
                     json.dump(data, file, ensure_ascii=False, indent=2)
 
-    def del_row_table(self):
+    def del_row_table(self) -> None:
+        """Функция удаляет запись из таблицы в GUI"""
+        # Определение выбраной строки в таблице в GUI
         row = self.ui.table_notes.currentRow()
         if row > -1:
             self.del_json(row)
