@@ -43,7 +43,7 @@ class Notepad(QMainWindow, ):
         self.ui.table_notes.setItem(rowPosition, 1, QTableWidgetItem(title))
         self.ui.table_notes.setItem(rowPosition, 2, QTableWidgetItem(str(date_time)))
         self.ui.table_notes.setItem(rowPosition, 0, QTableWidgetItem(id))
-        self.add_json(id, title, note, date_time)
+        self.add_json(title, note, date_time)
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
 
@@ -52,7 +52,9 @@ class Notepad(QMainWindow, ):
         with open("Json/notes.json", 'w', encoding="UTF-8") as file:
             json.dump(db, file)
 
-    def add_json(self, id, title, note, date_time):
+    def add_json(self, title, note, date_time):
+        notes = self.read_json()
+        id = self.assignment_id(notes)
         new_data = {id: [title, note, date_time]}
         with open("Json/notes.json", encoding="UTF-8") as f:
             data = json.load(f)
@@ -65,7 +67,8 @@ class Notepad(QMainWindow, ):
             data = json.load(file)
             return data['notes']
 
-    def view_table(self, notes):
+    def view_table(self):
+        notes = self.read_json()
         for i in notes:
             for k, v in i.items():
                 id = k
@@ -134,11 +137,9 @@ class Notepad(QMainWindow, ):
         print(note)
         date_time = datetime.now().strftime("%d-%m-%Y %H:%M")
 
-        notes = self.read_json()
-        id = self.assignment_id(notes)
-        self.add_json(id, title, note, date_time)
+        self.add_json(title, note, date_time)
         self.ui.table_notes.clearContents()
-        self.view_table(notes)
+        self.view_table()
 
 
 if __name__ == '__main__':
