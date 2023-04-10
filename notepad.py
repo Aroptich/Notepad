@@ -32,7 +32,7 @@ class Notepad(QMainWindow, ):
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
 
-    def create_note(self):
+    def create_note(self) -> None:
         """Функция создает запись"""
         notes = self.read_json()
         # Отследивание строки в таблице QTableWidget
@@ -53,13 +53,13 @@ class Notepad(QMainWindow, ):
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
 
-    def create_json(self):
+    def create_json(self) -> None:
         """Функция создает json-файл в указанной директории"""
         db = {"notes": []}
         with open("Json/notes.json", 'w', encoding="UTF-8") as file:
             json.dump(db, file)
 
-    def add_json(self, title, note):
+    def add_json(self, title: str, note: str) -> None:
         """Функция принимает на вход данные с полей ввода"""
         # Чтение данных с json-файла
         notes = self.read_json()
@@ -79,7 +79,7 @@ class Notepad(QMainWindow, ):
             data = json.load(file)
             return data['notes']
 
-    def view_table(self):
+    def view_table(self) -> None:
         """Функция отображает данные заметок в GUI из json-файла в таблицу"""
         # Считывание данных из json-файла
         notes = self.read_json()
@@ -93,7 +93,8 @@ class Notepad(QMainWindow, ):
                 self.ui.table_notes.setItem(rowPosition, 0, QTableWidgetItem(id))
                 self.ui.table_notes.setItem(rowPosition, 2, QTableWidgetItem(data_time))
 
-    def del_json(self, id):
+    def del_json(self, id: int) -> None:
+        """Функция получает на вход id записи и удаляет ее из json-файла"""
         if os.path.isfile("Json/notes.json"):
             with open("Json/notes.json", encoding="UTF-8") as file:
                 data = json.load(file)
