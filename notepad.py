@@ -111,7 +111,8 @@ class Notepad(QMainWindow, ):
             self.ui.table_notes.removeRow(row)
             self.ui.table_notes.selectionModel().clearCurrentIndex()
 
-    def edit_notes(self):
+    def edit_notes(self) -> tuple[list[dict], int]:
+        """Функция возвращает данные об выделенной заметке для ее редактривания"""
         row = self.ui.table_notes.currentRow()
         if os.path.isfile("Json/notes.json"):
             with open("Json/notes.json", encoding="UTF-8") as file:
