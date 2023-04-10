@@ -80,6 +80,8 @@ class Notepad(QMainWindow, ):
             return data['notes']
 
     def view_table(self):
+        """Функция отображает данные заметок в GUI из json-файла в таблицу"""
+        # Считывание данных из json-файла
         notes = self.read_json()
         for i in notes:
             for k, v in i.items():
