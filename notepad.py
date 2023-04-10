@@ -29,7 +29,7 @@ class Notepad(QMainWindow, ):
         else:
             self.create_json()
             notes = self.read_json()
-        self.view_table(notes)
+        self.view_table()
         self.ui.field_note.clear()
         self.ui.lineEdit.clear()
 
