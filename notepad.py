@@ -125,6 +125,7 @@ class Notepad(QMainWindow, ):
                     return list_values, row
 
     def assignment_id(self, notes: list[dict]) -> int:
+        """Функция присваивает уникальный id записи заметки и возвращает id = int"""
         try:
             id = 1
             if notes == []:
