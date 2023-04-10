@@ -10,6 +10,8 @@ from GUI.GUI import Ui_mainWindow
 
 
 class Notepad(QMainWindow, ):
+    """Класс Notepad представляет из себя мини-приложение, которое позволяет по средствам API редактировать, создавать
+    удалять заметки и сохранять все заметки в файл json. В классе реализовано GUI"""
     def __init__(self):
         super(Notepad, self).__init__()
         self.ui = Ui_mainWindow()
